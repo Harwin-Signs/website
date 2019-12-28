@@ -4,6 +4,7 @@
     "node": ">=4"
   },
   "dependencies": {
+    "gulp-nunjucks-render": "^2.2.3",
     "modernizr": "^3.7.1"
   },
   "devDependencies": {

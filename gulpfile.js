@@ -19,6 +19,13 @@ const isProd = process.env.NODE_ENV === 'production';
 const isTest = process.env.NODE_ENV === 'test';
 const isDev = !isProd && !isTest;
 
+function views() {
+  return src('app/*.njk')
+    .pipe($.nunjucksRender({ path: 'app' }))
+    .pipe(dest('.tmp'))
+    .pipe(server.reload({ stream: true }));
+};
+
 function styles() {
   return src('app/styles/*.scss')
     .pipe($.plumber())
@@ -92,7 +99,7 @@ function lintTest() {
 };
 
 function html() {
-  return src('app/*.html')
+  return src(['app/*.html', '.tmp/*.html'])
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
     .pipe($.if(/\.js$/, $.uglify({compress: {drop_console: true}})))
     .pipe($.if(/\.css$/, $.postcss([cssnano({safe: true, autoprefixer: false})])))
@@ -123,7 +130,8 @@ function fonts() {
 function extras() {
   return src([
     'app/*',
-    '!app/*.html'
+    '!app/*.html',
+    '!app/*.njk'
   ], {
     dot: true
   }).pipe(dest('dist'));
@@ -142,7 +150,7 @@ const build = series(
   clean,
   parallel(
     lint,
-    series(parallel(styles, scripts, modernizr), html),
+    series(parallel(views, styles, scripts, modernizr), html),
     images,
     fonts,
     extras
@@ -168,6 +176,7 @@ function startAppServer() {
     '.tmp/fonts/**/*'
   ]).on('change', server.reload);
 
+  watch('app/**/*.{html,njk}', views);
   watch('app/styles/**/*.scss', styles);
   watch('app/scripts/**/*.js', scripts);
   watch('modernizr.json', modernizr);
@@ -208,9 +217,9 @@ function startDistServer() {
 
 let serve;
 if (isDev) {
-  serve = series(clean, parallel(styles, scripts, modernizr, fonts), startAppServer);
+  serve = series(clean, parallel(views, styles, scripts, modernizr, fonts), startAppServer);
 } else if (isTest) {
-  serve = series(clean, scripts, startTestServer);
+  serve = series(clean, parallel(views, scripts), startTestServer);
 } else if (isProd) {
   serve = series(build, startDistServer);
 }
