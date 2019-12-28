@@ -9,6 +9,7 @@ const del = require('del');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const { argv } = require('yargs');
+const tildeImporter = require('node-sass-tilde-importer');
 
 const $ = gulpLoadPlugins();
 const server = browserSync.create();
@@ -31,6 +32,7 @@ function styles() {
     .pipe($.plumber())
     .pipe($.if(!isProd, $.sourcemaps.init()))
     .pipe($.sass.sync({
+      importer: tildeImporter,
       outputStyle: 'expanded',
       precision: 10,
       includePaths: ['.']
@@ -160,6 +162,7 @@ const build = series(
 
 function startAppServer() {
   server.init({
+    open: false,
     notify: false,
     port,
     server: {

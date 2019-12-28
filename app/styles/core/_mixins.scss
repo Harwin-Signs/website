@@ -1,0 +1,12 @@
+@function color($palette: primary, $number: 01) {
+  $palette: map-get($colors, $palette);
+  @return map-get($palette, $number);
+}
+
+@mixin breakpoint($name: desktop) {
+  $bp: map-get($breakpoints, $name);
+
+  @media print, screen and (min-width: $bp) {
+    @content;
+  }
+}

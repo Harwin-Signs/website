@@ -1,28 +1,63 @@
+@import '~normalize.css';
+
+@import "core/mixins";
+@import "core/breakpoints";
+@import "core/colors";
+
+html,
+body {
+  margin: 0;
+}
+
 .browserupgrade {
   margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
+  background: color(light, 01);
+  color: color(dark, 01);
   padding: 0.2em 0;
 }
 
 body {
-  background: #fafafa;
+  background: color(light, 01);
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  color: #333;
+  color: color(dark, 01);
+  position: relative;
 }
 
-.hero-unit {
-  margin: 50px auto 0 auto;
-  width: 300px;
-  font-size: 18px;
-  font-weight: 200;
-  line-height: 30px;
-  background-color: #eee;
-  border-radius: 6px;
-  padding: 60px;
-  h1 {
-    font-size: 60px;
-    line-height: 1;
-    letter-spacing: -1px;
+.root {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  position: relative;
+}
+
+header {
+  width: 100%;
+  height: 100%;
+  background-color: color(primary, 01);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+
+  .primary-logo {
+    width: 40%;
+    display: inline-block;
+
+    svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+
+  @include breakpoint(desktop) {
+    width: 50%;
+
+    .primary-logo {
+      width: 55%;
+    }
   }
 }
