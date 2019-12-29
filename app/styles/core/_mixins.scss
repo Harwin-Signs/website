@@ -3,6 +3,11 @@
   @return map-get($palette, $number);
 }
 
+@function image($file) {
+  $image-path: '../images';
+  @return url('#{$image-path}/#{$file}');
+}
+
 @mixin breakpoint($name: desktop) {
   $bp: map-get($breakpoints, $name);
 

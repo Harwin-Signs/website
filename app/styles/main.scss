@@ -1,12 +1,16 @@
 @import '~normalize.css';
 
+@import "core/resets";
 @import "core/mixins";
 @import "core/breakpoints";
 @import "core/colors";
 
+@import "elements";
+
 html,
 body {
   margin: 0;
+  scroll-behavior: smooth;
 }
 
 .browserupgrade {
@@ -18,32 +22,34 @@ body {
 
 body {
   background: color(light, 01);
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  color: color(dark, 01);
+  font-family: 'Be Vietnam', sans-serif;
   position: relative;
+  color: color(dark, 01);
 }
 
 .root {
   width: 100%;
-  min-height: 100%;
-  display: flex;
-  position: relative;
+
+  @include breakpoint(desktop) {
+    min-height: 100%;
+    display: flex;
+    position: relative;
+    justify-content: flex-end;
+  }
 }
 
 header {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: color(primary, 01);
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
-  left: 0;
-  top: 0;
+  position: relative;
   overflow: hidden;
 
   .primary-logo {
-    width: 40%;
+    width: 55%;
     display: inline-block;
 
     svg {
@@ -53,11 +59,83 @@ header {
     }
   }
 
+  .button {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translate(-50%);
+  }
+
   @include breakpoint(desktop) {
     width: 50%;
+    position: fixed;
+    left: 0;
+    top: 0;
 
-    .primary-logo {
-      width: 55%;
+    .button {
+      display: none;
+    }
+  }
+}
+
+main {
+  width: 100%;
+
+  @include breakpoint(desktop) {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+  }
+}
+
+.hero {
+  width: 100%;
+  height: 260px;
+  background-image: image('come-back-later.png');
+  background-position: center center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+
+  @include breakpoint(tablet) {
+    height: 300px;
+    background-size: 65%;
+  }
+}
+
+$side-padding: 60px;
+
+.coming-soon {
+  margin-bottom: 60px;
+  padding: 20px;
+
+  @include breakpoint(tablet) {
+    padding: 20px $side-padding;
+    margin-bottom: 60px;
+  }
+}
+
+footer {
+  padding: 20px 20px 30px 20px;
+  background-color: color(dark, 01);
+
+  .copyright {
+    margin-bottom: 0;
+    font-size: 12px;
+    color: color(light, 01);
+  }
+
+  @include breakpoint(tablet) {
+    padding: 25px $side-padding $side-padding;
+  }
+
+  @include breakpoint(desktop) {
+    padding: $side-padding;
+    background-color: color(light, 01);
+
+    .copyright {
+      margin-bottom: 10px;
+      color: color(dark, 01);
     }
   }
 }

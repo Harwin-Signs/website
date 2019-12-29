@@ -1,0 +1,60 @@
+p {
+  margin: 0 0 20px 0;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.8;
+
+  a {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  @include breakpoint(desktop) {
+    font-size: 16px;
+  }
+}
+
+a {
+  color: color(primary, 01);
+  text-decoration: none;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 15px;
+  padding-top: 5px;
+  border-top: 2px solid color(secondary, 01);
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+h2 {
+  margin: 0 0 25px 0;
+  font-size: 46px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.button {
+  height: 50px;
+  background-color: color(light, 01);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  svg {
+    width: 40%;
+
+    path {
+      fill: color(dark, 01);
+    }
+  }
+
+  &.circle {
+    width: 50px;
+    border-radius: 50px;
+  }
+}
