@@ -124,6 +124,27 @@ function images() {
     .pipe(dest('dist/images'));
 };
 
+function iconsfont() {
+  const fontName = 'icons';
+  return src(['app/images/svg/icons/*.svg'])
+    .pipe(
+      $.iconfontCss({
+        fontName: fontName,
+        path: 'app/styles/_icons.tpl',
+        targetPath: '../styles/core/_icons.scss',
+        fontPath: '../fonts/'
+      })
+    )
+    .pipe(
+      $.iconfont({
+        fontName: fontName,
+        normalize: true,
+        fontHeight: 1001
+      })
+    )
+    .pipe(dest('app/fonts/'));
+}
+
 function fonts() {
   return src('app/fonts/**/*.{eot,svg,ttf,woff,woff2}')
     .pipe($.if(!isProd, dest('.tmp/fonts'), dest('dist/fonts')));
@@ -154,6 +175,7 @@ const build = series(
     lint,
     series(parallel(views, styles, scripts, modernizr), html),
     images,
+    iconsfont,
     fonts,
     extras
   ),
@@ -180,6 +202,7 @@ function startAppServer() {
   ]).on('change', server.reload);
 
   watch('app/**/*.{html,njk}', views);
+  watch('app/images/svg/icons/*.svg', iconsfont);
   watch('app/styles/**/*.scss', styles);
   watch('app/scripts/**/*.js', scripts);
   watch('modernizr.json', modernizr);
@@ -220,7 +243,7 @@ function startDistServer() {
 
 let serve;
 if (isDev) {
-  serve = series(clean, parallel(views, styles, scripts, modernizr, fonts), startAppServer);
+  serve = series(clean, parallel(views, iconsfont, styles, scripts, modernizr, fonts), startAppServer);
 } else if (isTest) {
   serve = series(clean, parallel(views, scripts), startTestServer);
 } else if (isProd) {
