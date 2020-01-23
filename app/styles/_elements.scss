@@ -52,22 +52,26 @@ h2 {
 
 h3 {
   margin: 0 0 40px 0;
-  font-size: 60px;
+  font-size: 52px;
   line-height: 1.05;
   font-weight: 800;
   color: color(dark, 01);
   
   @include breakpoint(desktop) {
-    font-size: 65px;
+    font-size: 62px;
   }
 }
 
 h4 {
   margin: 0 0 30px 0;
-  font-size: 32px;
+  font-size: 30px;
   line-height: 1.25;
-  font-weight: 600;
+  font-weight: 800;
   color: color(secondary, 01);
+
+  @include breakpoint(desktop) {
+    font-size: 32px;
+  }
 }
 
 .button {

@@ -1,3 +1,4 @@
+import ScrollReveal from 'scrollreveal';
 import 'validate-js';
 import emailjs from 'emailjs-com';
 
@@ -15,15 +16,9 @@ import emailjs from 'emailjs-com';
   window.addEventListener('resize', updateViewportHeight);
   updateViewportHeight();
 
-  const getFormValues = form => {
-    const fields = form.querySelectorAll('[name]');
-    const data = [...fields].reduce((accum, curr) => {
-      let obj = {};
-      obj[curr.name] = curr.value;
-      return {...accum, ...obj};
-    }, {});
-    return data;
-  };
+  // Animations
+  ScrollReveal().reveal('.logo, .button', { distance: '20%', origin: 'bottom', delay: 0.25 });
+  ScrollReveal().reveal('.artwork, .artboard, .eyebrow, .overview, .header,', { distance: '20%', origin: 'bottom', delay: 0.25 });
 
   // https://rickharrison.github.io/validate.js/
   new FormValidator(DOM.form, [
@@ -52,6 +47,8 @@ import emailjs from 'emailjs-com';
       
       if (errors.length) {
         errors.map(({ element, display }) => {
+          const label = DOM.form.querySelector(`label[for='${element.id}']`);
+          label && label.classList.add('error');
           element.classList.add('error');
           element.insertAdjacentHTML('afterend', `<span class="error-message">${display}</span>`);
         });

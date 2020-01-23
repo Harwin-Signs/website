@@ -153,7 +153,7 @@ function iconsfont() {
         fontHeight: 1001
       })
     )
-    .pipe(dest('app/fonts/'));
+    .pipe(dest('app/fonts'));
 }
 
 function fonts() {
@@ -164,6 +164,7 @@ function fonts() {
 function extras() {
   return src([
     'app/*',
+    '!app/layouts',
     '!app/*.html',
     '!app/*.njk'
   ], {
