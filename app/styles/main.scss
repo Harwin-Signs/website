@@ -7,6 +7,7 @@
 @import "core/icons";
 
 @import "elements";
+@import "buttons";
 
 html,
 body {
@@ -28,115 +29,380 @@ body {
   color: color(dark, 01);
 }
 
-.root {
-  width: 100%;
+$side-padding: 60px;
+$mobile-side-padding: 20px;
 
-  @include breakpoint(desktop) {
-    min-height: 100%;
-    display: flex;
-    position: relative;
-    justify-content: flex-end;
-  }
+:root {
+  --full-height: calc(var(--vh, 1vh) * 100);
 }
 
-header {
+.root {
   width: 100%;
-  height: 100vh;
-  background-color: color(primary, 01);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-
-  .primary-logo {
-    width: 55%;
-    display: inline-block;
-
-    svg {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-  }
-
-  .button {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translate(-50%);
-  }
-
-  @include breakpoint(desktop) {
-    width: 50%;
-    position: fixed;
-    left: 0;
-    top: 0;
-
-    .button {
-      display: none;
-    }
-  }
 }
 
 main {
   width: 100%;
+  position: relative;
+}
+
+section {
+  width: 100%;
+  min-height: var(--full-height);
+  padding: $mobile-side-padding;
+  position: relative;
 
   @include breakpoint(desktop) {
-    width: 50%;
+    padding: $side-padding;
+  }
+
+  &.intro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: color(primary, 01);
+
+    span.logo {
+      max-width: 420px;
+      width: 60%;
+
+      svg {
+        width: 100%;
+      }
+    }
+
+    .button {
+      position: absolute;
+      bottom: 40px;
+    }
+
+    @include breakpoint(desktop) {
+      span.logo {
+        width: 50%;
+      }
+    }
+  }
+
+  // Who We Are
+  &.who-we-are {
     display: flex;
     flex-direction: column;
-    align-self: flex-end;
+
+    .artboard {
+      order: 1;
+      margin-bottom: 40px;
+
+      svg {
+        width: 100%;
+      }
+    }
+
+    .overview {
+      padding: $mobile-side-padding 0;
+      margin-bottom: 40px;
+  
+      .button {
+        margin-top: 40px;
+      }
+    }
+
+    @include breakpoint(desktop) {
+      flex-direction: row;
+      align-items: center;
+
+      .artboard {
+        order: 0;
+        width: 55%;
+        padding: 0 $side-padding / 2;
+        margin-bottom: 0;
+      }
+      
+      .overview {
+        width: 40%;
+        padding: 0 $side-padding;
+  
+        .button {
+          margin-top: 40px;
+        }
+      }
+    }
   }
-}
 
-.hero {
-  width: 100%;
-  height: 260px;
-  background-image: image('come-back-later.png');
-  background-position: center center;
-  background-size: 100%;
-  background-repeat: no-repeat;
+  // What We Do
+  &.what-we-do {
+    .header {
+      margin-bottom: 80px;
+    }
 
-  @include breakpoint(tablet) {
-    height: 300px;
-    background-size: 65%;
+    ul.services-list {
+      margin: 0 0 60px 0;
+      padding: 0;
+      list-style: none;
+    
+      li {
+        margin-bottom: 30px;
+      }
+    
+      @include breakpoint(desktop) {
+        display: flex;
+        justify-content: space-evenly;
+    
+        li {
+          margin: 0 30px;
+          flex-basis: 33.3%;
+      
+          &:first-of-type {
+            margin-left: 0;
+          }
+      
+          &:last-of-type {
+            margin-right: 0;
+          }
+        }
+      }
+    
+      .service {
+        height: 100%;
+        padding: 40px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+        background-color: color(light, 02);
+        border-radius: 20px;
+        text-align: center;
+    
+        .artwork {
+          display: inline-block;
+          margin-bottom: 20px;
+        }
+      }
+    }
+
+    .footer {
+      margin-bottom: 60px;
+      display: flex;
+      justify-content: center;
+    }
   }
-}
 
-$side-padding: 60px;
+  // Work With Us
+  &.work-with-us {
+    background-color: color(light, 02);
 
-.coming-soon {
-  margin-bottom: 60px;
-  padding: 20px;
+    .overview {
+      padding: $side-padding 0;
 
-  @include breakpoint(tablet) {
-    padding: 20px $side-padding;
-    margin-bottom: 60px;
+      h3 {
+        margin-bottom: 20px;
+      }
+
+      h4 {
+        color: color(gray, 02);
+      }
+
+      span.artwork {
+        width: 100%;
+        padding: 60px 0;
+        display: inline-block;
+      }
+    }
+
+    form {
+      padding: 0;
+
+      h4 {
+        margin-left: -2px;
+        color: color(dark, 01);
+        font-weight: 800;
+      }
+
+      input[type="text"],
+      select {
+        width: 100%;
+        height: 60px;
+        margin-bottom: 10px;
+        padding: 0;
+        border: none;
+        border-bottom: 1px solid #ccc;
+        font-size: 18px;
+        background-color: transparent;
+        outline: none;
+        border-radius: 0 !important;
+        -webkit-appearance: none;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+
+        &.error {
+          color: color(warning, 01);
+          border-color: color(warning, 01);
+
+          &::placeholder {
+            color: color(warning, 01);
+          }
+        }
+      }
+
+      select {
+        color: color(gray, 02);
+      }
+
+      fieldset {
+        border: none;
+        padding: 0;
+        margin: 15px 0 30px 0;
+      }
+
+      label {
+        margin-bottom: 15px;
+        font-size: 18px;
+        display: block;
+        color: color(gray, 02);
+      }
+
+      textarea {
+        width: 100%;
+        height: 160px;
+        border: none;
+        padding: 25px;
+        resize: none;
+        background-color: #e9e9e9;
+        outline: none;
+        font-size: 18px;
+
+        &.error {
+          background-color: rgba(color(warning, 01), 0.1);
+        }
+      }
+
+      .error-message {
+        display: block;
+        color: color(warning, 01);
+        font-size: 12px;
+      }
+
+      .disclaimer {
+        margin-top: 60px;
+        color: color(gray, 02);
+        font-size: 12px;
+        line-height: 1.6;
+      }
+
+      .form-fields {
+        width: 100%;
+      }
+
+      .thank-you {
+        display: none;
+
+        .artwork {
+          width: 100%;
+          display: flex;
+          margin-bottom: 40px;
+
+          svg {
+            width: auto;
+            height: 200px;
+          }
+        }
+
+        h5 {
+          margin: 0 0 20px 0;
+          margin-left: -2px;
+          color: color(gray, 02);
+          font-weight: 600;
+          font-size: 26px;
+        }
+      }
+
+      &.thanks {
+        .form-fields {
+          display: none;
+        }
+
+        .thank-you {
+          display: block;
+        }
+      }
+    }
+
+    @include breakpoint(desktop) {
+      display: flex;
+
+      .overview {
+        width: 50%;
+        padding: 0 $side-padding / 2;
+        padding-right: 120px;
+      }
+
+      form {
+        width: 50%;
+        padding: 0 $side-padding;
+      }
+    }
   }
 }
 
 footer {
-  padding: 20px 20px 30px 20px;
-  background-color: color(dark, 01);
+  padding: $mobile-side-padding;
+  background-color: color(primary, 01);
 
-  .copyright {
-    margin-bottom: 0;
-    font-size: 12px;
-    color: color(light, 01);
+  span.footer-logo {
+    width: 90px;
+    margin-bottom: 20px;
+    display: inline-block;
+    
+    svg {
+      width: 100%;
+    }
   }
 
-  @include breakpoint(tablet) {
-    padding: 25px $side-padding $side-padding;
+  .contact-info {
+    color: color(light, 01);
+    margin-bottom: 30px;
+
+    .tel {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    address {
+      font-style: normal;
+      font-size: 14px;
+      opacity: 0.75;
+    }
+  }
+
+  .copyright {
+    font-size: 12px;
+    color: color(light, 01);
+    opacity: 0.75;
   }
 
   @include breakpoint(desktop) {
+    display: flex;
+    align-items: center;
     padding: $side-padding;
-    background-color: color(light, 01);
+    padding-bottom: $side-padding * 1.5;
+
+    span.footer-logo {
+      margin-bottom: 0;
+    }
+
+    .contact-info {
+      margin-left: 60px;
+      margin-bottom: 0;
+      padding-left: 30px;
+      padding-bottom: 10px;
+      position: relative;
+      border-left: 1px solid rgba(color(light, 01), 0.5);
+    }
 
     .copyright {
+      margin-left: auto;
       margin-bottom: 10px;
-      color: color(dark, 01);
+      align-self: flex-end;
     }
   }
 }

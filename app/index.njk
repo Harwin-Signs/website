@@ -1,30 +1,112 @@
 {% extends "layouts/default.njk" %}
 
 {% block content %}
-  <header>
-    <span class="primary-logo">
-      {% include 'images/svg/harwin-signs-logo--primary.svg' %}
-    </span>
-    <a class="button circle" href="#main">
-      {% include 'images/svg/chevron-down.svg' %}
-    </a>
-  </header>
   <main id="main">
-    <div class="hero" role="image" arial-label="Come Back Later Illustration Art"></div>
+    <section class="intro" id="intro">
+      <span class="logo">
+        {% include 'images/svg/harwin-signs-logo--primary.svg' %}
+      </span>
+      <a class="button jump icon-chevron-down" href="#who-we-are"></a>
+    </section>
 
-    <article class="coming-soon">
-      <span class="eyebrow">Stay Tuned</span>
-      <h2>We’re Lauching Soon</h2>
-      <p>We are a one-stop signage shop located in Houston, Texas on Harwin Drive.</p>
-      <p>Our website is currently under construction. For more information, or to request a free quote and consultation, please contact us:</p>
-      <p>
-        <a href="tel:+1 (817) 382 8282">+1 (817) 382 8282</a><br>
-        <a href="mailto:hello@harwinsigns.com">hello@harwinsigns.com</a>
-      </p>
-    </article>
+    <section class="who-we-are" id="who-we-are">
+      <div class="artboard">
+        {% include 'images/svg/designers-engineers-art.svg' %}
+      </div>
+      <div class="overview">
+        <span class="eyebrow">Who We Are</span>
+        <h3>Designers + Engineers</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus dolor purus non enim praesent elementum facilisis leo, vel</p>
+        <a class="button explore icon-chevron-down" href="#what-we-do">
+          <span class="label">Explore</span>
+        </a>
+      </div>
+    </section>
 
-    <footer>
-      <p class="copyright">Copyright 2020 © Harwin Signs, LLC</p>
-    </footer>
+    <section class="what-we-do" id="what-we-do">
+      <div class="header">
+        <span class="eyebrow">What We Do</span>
+        <h3>Outfits For Your Business</h3>
+      </div>
+      <ul class="services-list">
+        <li>
+          <div class="service">
+            <span class="artwork">{% include 'images/svg/signboard.svg' %}</span>
+            <h4>Signs</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Semper porttitor sapien, feugiat enim, ac. Viverra leo suscipit ut sodales. Ut aenean aliquam vel volutpat egestas sed mattis.</p>
+          </div>
+        </li>
+        <li>
+          <div class="service">
+            <span class="artwork">{% include 'images/svg/printing.svg' %}</span>
+            <h4>Prints</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Semper porttitor sapien, feugiat enim, ac. Viverra leo suscipit ut sodales. Ut aenean aliquam vel volutpat egestas sed mattis.</p>
+          </div>
+        </li>
+        <li>
+          <div class="service">
+            <span class="artwork">{% include 'images/svg/sticker.svg' %}</span>
+            <h4>Vinyls</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Semper porttitor sapien, feugiat enim, ac. Viverra leo suscipit ut sodales. Ut aenean aliquam vel volutpat egestas sed mattis.</p>
+          </div>
+        </li>
+      </ul>
+      <div class="footer">
+        <a href="#work-with-us" class="button primary"><span class="label">Get In Touch</span></a>
+      </div>
+    </section>
+
+    <section class="work-with-us" id="work-with-us">
+      <div class="overview">
+        <span class="eyebrow">Work With Us</span>
+        <h3>We Are<br>Your Partner</h3>
+        <h4>Your Success is Our Success</h4>
+        <p>Tell us a bit about yourself and your project, and a representative will be in touch with you within 24 hours.</p>
+        <span class="artwork">{% include 'images/svg/your-partner-art.svg' %}</span>
+      </div>
+      <form action="#" id="form">
+        <div class="form-fields">
+          <h4>Get a Free Consultation</h4>
+          <input type="text" name="company" placeholder="Company">
+          <input type="text" name="name" placeholder="Name" id="name">
+          <input type="text" name="phone" placeholder="Phone Number">
+          <input type="text" name="email" placeholder="Email" id="email">
+          <select name="heardfrom">
+            <option value="" disabled selected hidden>How did you hear about us?</option>
+            <option value="Facebook">Facebook</option>
+            <option value="Twitter">Twitter</option>
+            <option value="Instagram">Instagram</option>
+            <option value="Google">Google</option>
+            <option value="Truck Ad">Truck Ad</option>
+            <option value="Word of Mouth">Word of Mouth</option>
+            <option value="Other">Other</option>
+          </select>
+          <fieldset>
+            <label for="details">Tell us a bit about your project:</label>
+            <textarea name="details" id="details"></textarea>
+          </fieldset>
+          <button class="button primary" type="submit"><span class="label">Send Message</span></button>
+        </div>
+        <div class="thank-you" aria-hidden>
+          <span class="artwork">
+            {% include 'images/svg/thank-you.svg' %}
+          </span>
+          <h5>Your Message has Been Sent</h5>
+          <p>Thank you for submitting your information. A Harwin Signs representative will be in touch with you within 24 to 48 hours.</p>
+          <button class="button primary js--back-to-form"><span class="label">Back</span></button>
+        </div>
+        <p class="disclaimer">We value and respect your privacy. Your information is yours. Therefore, we will not share your information with anyone, nor will it be used to spam you with marketing materials.</p>
+      </form>
+    </section>
   </main>
+  <footer>
+    <span class="footer-logo">
+      {% include 'images/svg/logo-square.svg' %}
+    </span>
+    <div class="contact-info">
+      <span class="tel">817.382.8282</span>
+      <address>9966 Harwin Dr, Houston, TX 77036</address>
+    </div>
+    <p class="copyright">Copyright 2020 &copy; Harwin Signs, LLC</p>
+  </footer>
 {% endblock %}
