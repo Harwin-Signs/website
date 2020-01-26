@@ -17,8 +17,7 @@ import emailjs from 'emailjs-com';
   updateViewportHeight();
 
   // Animations
-  ScrollReveal().reveal('.logo, .button', { distance: '20%', origin: 'bottom', delay: 0.25 });
-  ScrollReveal().reveal('.artwork, .artboard, .eyebrow, .overview, .header,', { distance: '20%', origin: 'bottom', delay: 0.25 });
+  ScrollReveal().reveal('[data-animate]', { distance: '25px', origin: 'bottom', delay: 0.35, interval: 100, easing: 'ease-out' });
 
   // https://rickharrison.github.io/validate.js/
   new FormValidator(DOM.form, [
