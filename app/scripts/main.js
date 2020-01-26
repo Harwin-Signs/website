@@ -57,6 +57,7 @@ import emailjs from 'emailjs-com';
           .then(resp => {
             DOM.form.classList.add('thanks');
             DOM.form.reset();
+            ScrollReveal().sync();
             console.log(resp);
           }, err => {
             console.log(err);
