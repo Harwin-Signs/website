@@ -4,6 +4,7 @@ import emailjs from 'emailjs-com';
 
 (() => {
   const DOM = {
+    splash: document.querySelector('#splash'),
     form: document.querySelector('#form')
   };
 
@@ -17,7 +18,7 @@ import emailjs from 'emailjs-com';
   updateViewportHeight();
 
   // Animations
-  ScrollReveal().reveal('[data-animate]', { distance: '25px', origin: 'bottom', delay: 0.35, interval: 100, easing: 'ease-out' });
+  ScrollReveal().reveal('section [data-animate], footer [data-animate]', { distance: '30px', origin: 'bottom', delay: 0.3, interval: 30, easing: 'ease-in-out' });
 
   // https://rickharrison.github.io/validate.js/
   new FormValidator(DOM.form, [
@@ -70,4 +71,7 @@ import emailjs from 'emailjs-com';
     e.preventDefault();
     DOM.form.classList.remove('thanks');
   });
+
+  // Preloader
+  Pace.once('done', () => DOM.splash.classList.add('start-animations'));
 })();

@@ -6,6 +6,7 @@
 @import "core/colors";
 @import "core/icons";
 
+@import "preloader";
 @import "elements";
 @import "buttons";
 
@@ -51,6 +52,30 @@ main {
   position: relative;
 }
 
+@keyframes float-animation {
+  0% {
+    transform: translateY(-20%);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-20%);
+  }
+}
+
+@keyframes scale-wide-animation {
+  0% {
+    transform: scaleX(0) translateX(-300%);
+  }
+  85% {
+    transform: scaleX(1.5);
+  }
+  100% {
+    transform: scaleX(1) translateX(0);
+  }
+}
+
 section {
   width: 100%;
   min-height: var(--full-height);
@@ -66,20 +91,66 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: color(primary, 01);
+
+    &:before {
+      content: '';
+      display: block;
+      width: 0;
+      height: 100%;
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      background-color: color(primary, 01);
+      transition: width 0.4s 0.65s ease-in-out;
+      z-index: 0;
+    }
 
     span.logo {
       max-width: 420px;
       width: 75%;
+      position: relative;
 
       svg {
         width: 100%;
+
+        path.inlay {
+          position: relative;
+          transform: scaleX(0);
+        }
       }
     }
 
     .button {
       position: absolute;
       bottom: 40px;
+      transition: transform 0.65s 1.15s ease, opacity 0.65s 1.25s ease;
+      opacity: 0;
+      transform: translateY(-30%);
+    }
+
+    &.start-animations {
+      &:before {
+        width: 100%;
+      }
+
+      span.logo {
+        svg {
+          path.inlay {
+            animation: scale-wide-animation .55s ease 0.3s forwards;
+          }
+        }
+      }
+
+      .button {
+        opacity: 1;
+        transform: translateY(0);
+        animation: float-animation 1.2s linear infinite;
+        
+        &:hover {
+          animation-play-state: paused;
+        }
+      }
     }
 
     @include breakpoint(desktop) {
@@ -108,7 +179,7 @@ section {
     }
 
     h4 {
-      color: color(gray, 01);
+      color: color(gray, 02);
     }
 
     .button {
