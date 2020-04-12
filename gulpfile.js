@@ -14,6 +14,7 @@ const browserify = require('browserify');
 const babelify = require('babelify');
 const buffer = require('vinyl-buffer');
 const source = require('vinyl-source-stream');
+const ghpages = require('gh-pages');
 
 const $ = gulpLoadPlugins();
 const server = browserSync.create();
@@ -222,6 +223,10 @@ function startAppServer() {
   watch('app/fonts/**/*', fonts);
 }
 
+function deploy() {
+  return ghpages.publish('dist', {branch: 'master'}, function(err) {});
+}
+
 function startTestServer() {
   server.init({
     notify: false,
@@ -263,6 +268,7 @@ if (isDev) {
   serve = series(build, startDistServer);
 }
 
+exports.deploy = deploy;
 exports.serve = serve;
 exports.build = build;
 exports.default = build;
